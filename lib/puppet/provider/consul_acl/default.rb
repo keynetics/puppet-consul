@@ -8,6 +8,8 @@ Puppet::Type.type(:consul_acl).provide(
   mk_resource_methods
 
   def self.prefetch(resources)
+    #most likely consul just restarted.  let's wait a little
+    sleep 10
     resources.each do |name, resource|
       Puppet.debug("prefetching for #{name}")
       port = resource[:port]
